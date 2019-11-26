@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+p {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    margin-left: 450px;
+}
+
+.table {
+    width: 70%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    margin-left: 160px;
+}
+.sidenav {
+  height: 100%;
+  /* width: 162px; */
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 52px;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a (click)="User()"><i class="fa fa-fw fa-user" style="padding-top: 25px;"></i> Student</a>
+  <a (click)="Mentor()"><i class="fa fa-fw fa-graduation-cap" style="padding-top: 15px;" aria-hidden="true"></i> Mentor</a>
+  <a (click)="Skill()"><i class="fa fa-fw fa-envelope" style="padding-top: 15px;"></i> Skill</a>
+
+
+  
+</div>
+
+<div class="container" *ngIf="check()==1">
+  <p style="font-size: large; align-content: center; color: blue;">Student Details</p>          
+  <table class="table table-hover justify-content-centre" style="background: white;"width="100"  >
+    <thead style="background: #818181;" width="100">
+      <tr>
+        <th>UserId</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>MobileNo</th>
+        <th>Active Status</th>
+        <th>Block/Unblock</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+  
+        <tbody *ngFor="let item of list">
+                <tr>
+                    <td>{{item.userId}}</td>
+                    <td>{{item.userName}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.mobileNo}}</td>
+                    <td>{{item.active}}</td>
+                    <td *ngIf="item.active"><button (click)="BlockUser(item.userId)" style="background:green; width: 70px; color: white;  border-radius: 8px;  height: 28px; margin-left: 14px;"> Block</button></td>
+                    <td *ngIf="!item.active"><button (click)="BlockUser(item.userId)" style="background: red;  width: 70px;  color: white;  border-radius: 8px;  height: 28px; margin-left: 14px;"> UnBlock</button></td>
+                  
+                    <td><button (click)="DeleteUser(item.userId)"><a><i class="fa fa-trash" aria-hidden="true"> Delete</i></a></button></td>
+                </tr>
+        </tbody>
+  </table>
+</div>
+
+<div class="container" *ngIf="check()==2">
+  <p style="font-size: large; align-content: center; color: blue;">Mentor Details</p>          
+  <table class="table table-hover justify-content-centre" style="background: white;"width="100"  >
+    <thead style="background: #818181;" width="100">
+        <tr>
+          <th>MentorId</th>
+          <th>MentorName</th>
+          <th>Email</th>
+          <th>ContactNo</th>
+          <th>TimeSlot</th>
+          <th>PrimarySkills</th>
+          <th>Experience</th>
+          <th>Active Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      
+            <tbody *ngFor="let item1 of list1">
+                    <tr>
+                        <td>{{item1.mentorId}}</td>
+                        <td>{{item1.mentorName}}</td>
+                        <td>{{item1.email}}</td>
+                        <td>{{item1.mobileNo}}</td>
+                        <td>{{item1.timeSlot}}</td>
+                        <td>{{item1.primarySkills}}</td>
+                        <td>{{item1.experience}}</td>
+                        <td>{{item1.active}}</td>
+                        <td><button (click)="DeleteMentor(item1.mentorId)"><a><i class="fa fa-trash" aria-hidden="true"> Delete</i></a></button></td>
+                    </tr>
+                </tbody>
+       
+    </table>
+  </div>
+
+  <div class="container" *ngIf="check()==3">
+    <p style="font-size: large; align-content: center; color: blue;">Skills Details</p>    
+    <button (click)="showDialog = !showDialog" type="button" style="float: right;margin-bottom: 15px;" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add Skill</button><br>      
+    <table class="table table-hover justify-content-centre" style="background: white;"width="100"  >
+      <thead style="background: #818181;" width="100">
+        <tr>
+          <th>Skill Id</th>
+          <th>Skill Name</th>
+          <th>TOC</th>
+          <th>Skill Fees</th>
+          <th>Duration</th>
+          <th>Edit Skills</th>
+          <th>Delete Skills</th>
+        </tr>
+      </thead>
+    
+          <tbody *ngFor="let item3 of list2">
+                  <tr>
+                    <td>{{item3.skillId}}</td>
+                    <td>{{item3.skillName}}</td>
+                    <td>{{item3.toc}}</td>
+                    <td>{{item3.skillFee}}</td>
+                    <td>{{item3.duration}}</td>
+                    <td><button (click)="showDialog1 = !showDialog1; GetSkillById(item3.skillId)"><a><i class="fa fa-edit" aria-hidden="true"> Edit</i></a></button></td>
+                    <td><button (click)="DeleteSkill(item3.skillId)"><a><i class="fa fa-trash" aria-hidden="true"> Delete</i></a></button></td>
+                  </tr>
+          </tbody>
+    </table>
+  </div>
+
+
+  <app-dialog [(visible)]="showDialog">
+      <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+            <div class="card-heading">
+            <h2 class="title" style="color:white;padding-left: 35px; font-size: 25px; ">Skill Details</h2>
+            </div>
+        <div class="card-body">
+            <form method="POST">
+           <div class="form-row">
+              <div class="name">Skill Name</div>
+              <div class="value">
+              <div class="input-group">
+              <input class="input--style-5" type="text" name="skillName" [(ngModel)]="item2.skillName">
+              </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">TOC</div>
+              <div class="value">
+              <div class="input-group">
+              <textarea class="input--style-5" type="text" name="toc" [(ngModel)]="item2.toc"></textarea>
+              </div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="name">Skill Fees</div>
+              <div class="value">
+              <div class="input-group">
+              <input class="input--style-5" type="number" name="skillFee" [(ngModel)]="item2.skillFee">
+              </div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="name">Duration</div>
+                <div class="value">
+                <div class="input-group">
+                <input class="input--style-5" type="text" name="duration"[(ngModel)]="item2.duration">
+                </div>
+                </div>
+            </div>
+
+        <div>
+            <button class="btn btn--radius-2 btn--red"  (click)="AddSkill()" type="submit">Save</button>
+           
+            <button (click)="showDialog = !showDialog" class="btn btn--radius-2 btn--red" style="margin-left: 100px;">Close</button>
+            </div>
+          </form>
+            </div>
+            </div>
+            </div>
+            </app-dialog>
+
+            <app-update-dialog [(visible)]="showDialog1">
+              <div class="wrapper wrapper--w790">
+                    <div class="card card-5">
+                    <div class="card-heading">
+                    <h2 class="title" style="color:white;padding-left: 35px; font-size: 25px; ">Skill Details</h2>
+              </div>
+              <div class="card-body">
+                    <form method="POST">
+                   <div class="form-row">
+                      <div class="name">Skill Name</div>
+                      <div class="value">
+                      <div class="input-group">
+                      <input class="input--style-5" type="text" name="skillName" [(ngModel)]="item3.skillName">
+                      </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="name">TOC</div>
+                      <div class="value">
+                      <div class="input-group">
+                      <textarea class="input--style-5" type="text" name="toc" [(ngModel)]="item3.toc"></textarea>
+                      </div>
+                      </div>
+                    </div>
+                   
+                    <div class="form-row">
+                      <div class="name">Skill Fees</div>
+                      <div class="value">
+                      <div class="input-group">
+                      <input class="input--style-5" type="number" name="skillFee" [(ngModel)]="item3.skillFee">
+                      </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Duration</div>
+                        <div class="value">
+                        <div class="input-group">
+                        <input class="input--style-5" type="text" name="duration"[(ngModel)]="item3.duration">
+                        </div>
+                        </div>
+                      </div>
+                    
+              <div>
+                    <button class="btn btn--radius-2 btn--red"  (click)="EditSkill()" type="submit">Update</button>
+                   
+                    <button (click)="showDialog1 = !showDialog1" class="btn btn--radius-2 btn--red" style="margin-left: 100px;">Close</button>
+                    </div>
+                  </form>
+                    </div>
+                    </div>
+                    </div>
+                    
+                    </app-update-dialog>
+   
+</body>
+</html> 

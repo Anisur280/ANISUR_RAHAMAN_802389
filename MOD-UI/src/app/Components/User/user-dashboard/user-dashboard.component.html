@@ -1,0 +1,110 @@
+
+
+
+<nav class="navbar navbar-inverse" style=" border-color:none;border-radius: 0px; margin-bottom: 0px; border: none;">
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav"  style="font-size: 20px;">
+      <li ><a  (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" >Search Trainings</a></li>
+        
+       
+
+      <li ><a   routerLink="ucomplete">Completed Trainings</a></li>
+      <li ><a   routerLink="ucurrent">Current Trainings</a></li>
+
+    </ul>
+
+    
+  </div>
+</nav>
+<form >
+
+<div  id="collapseExample" [ngbCollapse]="!isCollapsed">
+  
+      <div class="inner-form">
+        <div class="input-field first-wrap">
+        <input id="search" list="host" type="text"  name="primarySkills" [(ngModel)]="primarySkills" placeholder="Which Technology are you looking for?">
+        <datalist id='host'>
+        <option *ngFor="let item1 of list1" value={{item1.skillName}}></option>
+        
+        </datalist>
+        </div>
+        <div class="input-field second-wrap">
+        <input list="slot" type="text" placeholder="TimeSlot" name="timestart" [(ngModel)]="timestart">
+        <datalist id='slot'>
+          <option value="08:30AM - 10:30AM"></option>
+          <option value="09:00AM - 11:00AM"></option>
+          <option value="10:30AM - 12:30PM"></option>
+          <option value="11:00AM - 1:00PM"></option>
+          <option value="11:30AM - 01:30PM"></option>
+          <option value="02:00PM - 04:00PM"></option>
+          <option value="03:00PM - 05:00AM"></option>
+          <option value="04:00PM - 06:00PM"></option>
+          <option value="05:30PM - 07:30PM"></option>
+          <option value="06:00PM - 08:00PM"></option>
+        </datalist>  
+      </div>
+        <div class="input-field third-wrap">
+        <button class="btn-search" type="button" (click)="onSubmit()">Search</button>
+        </div>
+        </div>
+    </div>
+  
+  </form>
+  
+<section class="listings" style="position: relative;
+top: 20px; margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+  color: #fff">
+  <div class="container">
+          <div class="col-md-9" style="background: rgba(0, 0, 0, 0.5);
+          width: 899px; position: relative;;left:1px; align-self: auto;">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h2> Results</h2>
+                      <p> {{count}} results found  </p>
+                  </div>
+              </div>
+              
+              <div class="row mb-3" *ngFor="let item of list; let i=index" >
+      <div class="col-md-12" >
+        <div class="card" >
+          <div class="card-body" >
+             <div  class="row">
+              <!-- <div class="col-md-3">
+                <img src="../../../../assets/images/mentorimg.png" style="max-width: 110px ;padding-top: 5px; padding-bottom: 5px;"alt="">
+              </div> -->
+              <div class="col-md-3"  >
+                <h3>{{item.mentorName}}</h3>
+                <label >Email :</label><p style="margin-top: -25px; margin-left: 63px; position:inherit;color:white" >{{item.email}}</p>
+                <label >Contact No:</label><p style="margin-top: -25px; margin-left: 93px;">{{item.mobileNo}}</p>
+              </div>
+              
+              <div class="col-md-3" style="margin-top: 40px;">
+                <label >Experience :</label><p style="margin-top: -25px; margin-left: 96px;">{{item.experience}}</p>
+                <label >Timeslot :</label><p style="margin-top: -25px; margin-left: 85px;">{{item.timeSlot}}</p> 
+              </div>
+
+              <div class="col-md-3" style="margin-top: 36px;"><label >Course fees :</label><p style="margin-top: -25px;
+                margin-left: 100px;">{{list2[i]}}</p><br>
+  
+                 <button type="button" class="btn btn-primarybtn-sm btn-success" (click)="Send(item.mentorId,item.timeSlot,list2[i],SkillId[i],item)"><a >Subscribe</a></button>
+                 
+              
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        
+      </div>	
+      </div>
+              
+              
+          </div>
+      </div> 
+</section>
+<router-outlet></router-outlet>
+

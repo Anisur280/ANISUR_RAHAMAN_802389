@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+p {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    margin-left: 450px;
+}
+
+.table {
+    width: 70%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    margin-left: 160px;
+}
+.sidenav {
+  height: 100%;
+  /* width: 162px; */
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 52px;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a (click)="CurrentTraining()"><i class="fa fa-fw fa-graduation-cap" style="padding-top: 25px;"></i>CurrentTraining</a>
+  <a (click)="CompletedTraining()"><i class="fa fa-fw fa-graduation-cap" style="padding-top: 15px;" aria-hidden="true"></i>CompletedTraining</a>
+   
+</div>
+
+<div class="container" *ngIf="check()==1">
+        <p style="font-size: large; align-content: center; color: blue;">Current Training Details</p>          
+        <table class="table table-hover justify-content-centre" style="background: white;"width="100"  >
+          <thead style="background: #818181;" width="100">
+            <tr>
+              <th>Training Id</th>
+              <th>User Id</th>
+              <th>Mentor Id</th>
+              <th>Status</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Progress</th>
+            </tr>
+          </thead>
+        
+              <tbody *ngFor="let item of list">
+                      <tr>
+                          <td>{{item.trainingId}}</td>
+                          <td>{{item.userId}}</td>
+                          <td>{{item.mentorId}}</td>
+                          <td>{{item.status}}</td>
+                          <td>{{item.startDate}}</td>
+                          <td>{{item.endDate}}</td>
+                          <td>{{item.progress}}</td>
+  
+                      </tr>
+              </tbody>
+        </table>
+      </div>
+
+      <div class="container" *ngIf="check()==2">
+            <p style="font-size: large; align-content: center; color: blue;">Completed Training Details</p>          
+            <table class="table table-hover justify-content-centre" style="background: white;"width="100"  >
+              <thead style="background: #818181;" width="100">
+                <tr>
+                        <th>Training Id</th>
+                        <th>User Id</th>
+                        <th>Mentor Id</th>
+                        <th>Status</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Progress</th>
+                </tr>
+              </thead>
+            
+                  <tbody *ngFor="let item of list">
+                          <tr>
+                                <td>{{item.trainingId}}</td>
+                                <td>{{item.userId}}</td>
+                                <td>{{item.mentorId}}</td>
+                                <td>{{item.status}}</td>
+                                <td>{{item.startDate}}</td>
+                                <td>{{item.endDate}}</td>
+                                <td>{{item.progress}}</td>
+      
+                          </tr>
+                  </tbody>
+            </table>
+          </div>
+</body>
+</html>

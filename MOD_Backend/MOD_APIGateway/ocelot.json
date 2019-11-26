@@ -1,0 +1,81 @@
+{
+  "ReRoutes": [
+    // Technolgoy
+    {
+      "DownstreamPathTemplate": "/api/Skill/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 22165
+        }
+      ],
+      "UpstreamPathTemplate": "/Skill/{catchAll}"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Training/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 22158
+        }
+      ],
+      "UpstreamPathTemplate": "/Training/{catchAll}"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 22157
+        }
+      ],
+      "UpstreamPathTemplate": "/User/{catchAll}"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Mentor/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 22157
+        }
+      ],
+      "UpstreamPathTemplate": "/Mentor/{catchAll}"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Login/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 22212
+        }
+      ],
+      "UpstreamPathTemplate": "/Login/{catchAll}"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Payment/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 22160
+        }
+      ],
+      "UpstreamPathTemplate": "/Payment/{catchAll}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:44383"
+  }
+}

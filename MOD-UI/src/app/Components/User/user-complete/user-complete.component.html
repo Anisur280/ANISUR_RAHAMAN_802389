@@ -1,0 +1,32 @@
+
+
+<div class="container">
+	<p style="font-size: large;color: #f1f1f1;">Completed Trainings</p>          
+   <table class="table table-hover" style="background: white;">
+	 <thead style="background: #dacadaa6;">
+	   <tr>
+		 <th>Training Id</th>
+		 <th>Start Date</th>
+		 <th>End Date</th>
+		 <th>Status</th>
+		 <th>Progress</th>
+		 <th>Rating</th>
+
+	   </tr>
+	 </thead>
+	 
+		   <tbody *ngFor="let item of list3">
+				   <tr>
+					   <td>{{item.trainingId}}</td>
+					   <td>{{item.startDate}}</td>
+					   <td>{{item.endDate}}</td>
+					   <td>{{item.status}}</td>
+					   <td>{{item.progress}}</td>
+                       <td>{{item.rating}}</td>
+					   
+				   </tr>
+			   </tbody>
+	  
+   </table>
+ </div>
+

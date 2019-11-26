@@ -1,0 +1,81 @@
+<section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <input type="text" name="mentorname" id="name" placeholder="Your Name" formControlName="mentorname" [(ngModel)]="item.mentorname" [ngClass]="{ 'is-invalid': submitted && f.mentorname.errors }">
+                            <div *ngIf="submitted && f.mentorname.errors" class="invalid-feedback" style="color: red;">
+                                <div *ngIf="f.mentorname.errors.required">Name is required</div>
+                                <div *ngIf="f.mentorname.errors.pattern">Name must have characters only</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" placeholder="Your Email" formControlName="email" [(ngModel)]="item.email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback" style="color: red;">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" id="pass" placeholder="Password" name="password" formControlName="password" [(ngModel)]="item.password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback" style="color: red;">
+                                 <div *ngIf="f.password.errors.required">Password is required</div>
+                                 <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+							<input type="text" name="mobileno" id="mobile" placeholder="Mobile No" [(ngModel)]="item.mobileno" formControlName="mobileno" [ngClass]="{ 'is-invalid': submitted && f.mobileno.errors }">
+                            <div *ngIf="submitted && f.contactno.errors" class="invalid-feedback" style="color: red;">
+                                <div *ngIf="f.mobileno.errors.required">Mobileno is required</div>
+                                <div *ngIf="f.mobileno.errors.pattern">Mobileno should have Numeric values</div>
+                                <div *ngIf="f.mobileno.errors.minlength">Mobileno must be at least 10 characters</div>
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <input type="text" name="experince" id="experience" placeholder="Experience" [(ngModel)]="item.experience" formControlName="experience" [ngClass]="{ 'is-invalid': submitted && f.experience.errors }">
+                            <div *ngIf="submitted && f.experience.errors" class="invalid-feedback" style="color: red;">
+                            <div *ngIf="f.experience.errors.required">Minimum 1 year is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="primaryskills" List="host" id="" placeholder="Select Your PrimarySkills" [(ngModel)]="item.primaryskills"  formControlName="primaryskills" [ngClass]="{ 'is-invalid': submitted && f.primaryskills.errors }">
+                            <datalist id='host'>
+                                <option *ngFor="let item1 of list1" value={{item1.skillName}}></option>
+                                </datalist>
+                                <div *ngIf="submitted && f.primaryskills.errors" class="invalid-feedback" style="color: red;">
+                                     <div *ngIf="f.primaryskills.errors.required">PrimarySkills is required</div>
+                                </div>
+                        </div> 
+                        <div class="form-group">
+                            <input type="text" name="timeslot" List="slot" placeholder="Select Your Timeslot" [(ngModel)]="item.timeslot" formControlName="timeslot" [ngClass]="{ 'is-invalid': submitted && f.timeslot.errors }">
+                            <datalist id='slot'>
+                                    <option value="08:30AM-10:30AM"></option>
+                                    <option value="09:00AM-11:00AM"></option>
+                                    <option value="10:30AM-12:30PM"></option>
+                                    <option value="11:00AM-01:00PM"></option>
+                                    <option value="11:30AM-01:30PM"></option>
+                                    <option value="02:00PM-04:00PM"></option>
+                                    <option value="03:00PM-05:00PM"></option>
+                                    <option value="04:00PM-06:00PM"></option>
+                                    <option value="05:30PM-07:30PM"></option>
+                                    <option value="06:00PM-08:00PM"></option>
+                            </datalist>
+                            <div *ngIf="submitted && f.timeslot.errors" class="invalid-feedback" style="color: red;">
+                                 <div *ngIf="f.timeslot.errors.required">Time Slot is required</div>
+                            </div>
+                        </div>       
+                        <div class="form-group form-button">
+                            <button  class="btn btn--radius btn--green" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="assets/images/signup-image.jpg" alt="sing up image"></figure>
+                    <a routerLink="../Login" >Already a member?</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{item|json}}
